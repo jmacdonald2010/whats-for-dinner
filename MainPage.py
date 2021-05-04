@@ -63,6 +63,9 @@ class MainPage(App):
             if len(q) > self.largest_table:
                 self.largest_table = len(q)
 
+    def build(self):
+        pass
+
     def build_meal(self):
         if (random.range(0,1)) > 0:
             table_size = ("SELECT meal_id FROM full_meals")
