@@ -1,0 +1,17 @@
+# <MainPage>
+meal: Meal
+veg: Veg
+carb: Carb
+GridLayout:
+    rows: 5
+    Label:
+        text: Meal
+    Label:
+        text: Veg
+    Label:
+        text: Carb
+    Button:
+        text: "Generate a Meal"
+        on_press: root.build_meal()
+    Button:
+        text: "Add Food"
