@@ -1,15 +1,21 @@
-# <MainPage>:
-meal: Meal
-veg: Veg
-carb: Carb
-GridLayout:
+<MainGrid>:
+
+    meal: meal
+    veg: veg
+    carb: carb
+
+    
     rows: 5
+    cols: 1
     Label:
-        text: Meal
+        id: meal
+        text: ""
     Label:
-        text: Veg
+        id: veg
+        text: ""
     Label:
-        text: Carb
+        id: carb 
+        text: ""
     Button:
         text: "Generate a Meal"
         on_press: root.build_meal()

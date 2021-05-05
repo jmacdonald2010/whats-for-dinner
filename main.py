@@ -1,5 +1,5 @@
 import sqlite3
-from kivy.app import App, runTouchApp
+from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
@@ -42,17 +42,18 @@ conn.execute("""CREATE TABLE IF NOT EXISTS carb (
 );
 """)
 
-# app class
-class MainPage(App):
+# import kv file
+kv_file = Builder.load_file("main.kv")
 
+# Grid Layout Class
+class MainGrid(GridLayout):
     # variables for the kv file
     meal = ObjectProperty(None)
     veg = ObjectProperty(None)
     carb = ObjectProperty(None)
 
     def __init__(self, **kwargs):
-        super(MainPage, self).__init__(**kwargs)
-
+        super(MainGrid, self).__init__(**kwargs)
         self.largest_table = 0
 
         # determine how many items are in the db
@@ -63,9 +64,6 @@ class MainPage(App):
             if len(q) > self.largest_table:
                 self.largest_table = len(q)
 
-    def build(self):
-        pass
-
     def build_meal(self):
         if (random.range(0,1)) > 0:
             table_size = ("SELECT meal_id FROM full_meals")
@@ -73,16 +71,22 @@ class MainPage(App):
             rand_num = random.range(0, (table_size - 1))
             self.meal = conn.execute(f"SELECT * FROM full_meals WHERE meal_id = {rand_num}")
             self.meal = self.meal.fetchall()
-            meal = self.meal[0]
+            self.meal = self.meal[0]
         else:
             meal_dict = {}
             for x in ("meat", "veg", "carb"):
                 q = conn.execute(f"SELECT {x} FROM {x}")
                 q = q.fetchall()
                 meal_dict[x] = q[random.range(0, (len(q) - 1))]
-            meal = meal_dict["meat"]
-            veg = meal_dict["veg"]
-            carb = meal_dict["carb"]
+            self.meal = meal_dict["meat"]
+            self.veg = meal_dict["veg"]
+            self.carb = meal_dict["carb"]
+
+# app class
+class MainPage(App):
+
+    def build(self):
+        return MainGrid()
 
 if __name__ == "__main__":
     MainPage().run()
