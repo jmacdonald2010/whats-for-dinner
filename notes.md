@@ -1,5 +1,8 @@
 # Notes on main branch
 
+## 5/4/2021 21:37
+Basic functionality works.
+
 ## 5/4/2021 21:29
 Random meal works on first button push. Does not work on subsequent presses.
 
