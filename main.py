@@ -65,22 +65,23 @@ class MainGrid(GridLayout):
                 self.largest_table = len(q)
 
     def build_meal(self):
-        if (random.range(0,1)) > 0:
-            table_size = ("SELECT meal_id FROM full_meals")
+        if (random.randint(0,1)) > 0:
+            table_size = conn.execute("SELECT meal_id FROM full_meals")
             table_size = len(table_size.fetchall())
-            rand_num = random.range(0, (table_size - 1))
-            self.meal = conn.execute(f"SELECT * FROM full_meals WHERE meal_id = {rand_num}")
-            self.meal = self.meal.fetchall()
-            self.meal = self.meal[0]
+            rand_num = random.randint(0, table_size)
+            self.meal_q = conn.execute(f"SELECT meal_name FROM full_meals WHERE meal_id = {rand_num}")
+            self.meal_q = self.meal_q.fetchall()
+            self.meal_q = self.meal_q[0][0]
+            self.meal.text = self.meal_q
         else:
             meal_dict = {}
             for x in ("meat", "veg", "carb"):
                 q = conn.execute(f"SELECT {x} FROM {x}")
                 q = q.fetchall()
-                meal_dict[x] = q[random.range(0, (len(q) - 1))]
-            self.meal = meal_dict["meat"]
-            self.veg = meal_dict["veg"]
-            self.carb = meal_dict["carb"]
+                meal_dict[x] = q[random.randint(0, len(q))]
+            self.meal.text = meal_dict["meat"][0]
+            self.veg.text = meal_dict["veg"][0]
+            self.carb.text = meal_dict["carb"][0]
 
     '''def build_popup(self):
         popup = Popup(title="Add Food", size_hint=(None, None))

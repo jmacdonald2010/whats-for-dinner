@@ -1,5 +1,8 @@
 # Notes on main branch
 
+## 5/4/2021 21:29
+Random meal works on first button push. Does not work on subsequent presses.
+
 ## 5/4/2021 21:19
 I don't think I commited prior to the DB write update. Going to do that now that it is actually working.
 
