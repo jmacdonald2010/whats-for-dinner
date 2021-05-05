@@ -82,6 +82,41 @@ class MainGrid(GridLayout):
             self.veg = meal_dict["veg"]
             self.carb = meal_dict["carb"]
 
+    '''def build_popup(self):
+        popup = Popup(title="Add Food", size_hint=(None, None))
+        popup_grid = GridLayout(rows=8, cols=1)
+        popup.add_widget(popup_grid)'''
+
+class MyPopup(Popup):
+
+    # Object Properties for the Popup, to allow for entries to be cleared after being entered.
+    full_meal = ObjectProperty(None)
+    meat_main = ObjectProperty(None)
+    veggies = ObjectProperty(None)
+    carbs = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(MyPopup, self).__init__(**kwargs)
+
+    def update_text(self, field, text, column):
+        self.new_entry = {0: field, 1: text, 2: column}
+
+    def update_db(self):
+        # try:
+        conn.execute(f"INSERT INTO {self.new_entry[0]} ({self.new_entry[2]}) VALUES ('{self.new_entry[1]}');")
+        conn.commit()
+        print(f"Added {self.new_entry[1]} to DB")
+        if self.new_entry[0] == "full_meals":
+            self.full_meal.text = ""
+        elif self.new_entry[0] == "meat":
+            self.meat_main.text = ""
+        elif self.new_entry[0] == "veg":
+            self.veggies.text = ""
+        elif self.new_entry[0] == "carb":
+            self.carbs.text = ""
+        '''except:
+            print("Missing Required Values or other error.")'''
+
 # app class
 class MainPage(App):
 

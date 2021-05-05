@@ -1,5 +1,11 @@
 # Notes on main branch
 
+## 5/4/2021 21:19
+I don't think I commited prior to the DB write update. Going to do that now that it is actually working.
+
+## 5/4/2021 21:13
+Made significant progress on the popup window. Working on database writing.
+
 ## 5/4/2021 20:33
 Merging to main since I managed to get the app to actually display things.
 

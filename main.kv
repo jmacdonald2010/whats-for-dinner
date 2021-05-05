@@ -1,3 +1,45 @@
+#:import Factory kivy.factory.Factory
+<MyPopup>:
+    full_meal: full_meal
+    meat_main: meat_main
+    veggies: veggies
+    carbs: carbs
+    GridLayout:
+        rows: 8
+        cols: 1
+        TextInput:
+            multiline: False
+            id: full_meal
+            hint_text: "Full Meal"
+            on_text: root.update_text("full_meals", self.text, "meal_name")
+        Button:
+            text: "Submit Full Meal"
+            on_press: root.update_db()
+        TextInput:
+            multiline: False
+            id: meat_main
+            hint_text: "Meat/Main"
+            on_text: root.update_text("meat", self.text, "meat")
+        Button:
+            text: "Submit Meat/Main"
+            on_press: root.update_db()
+        TextInput:
+            multiline: False
+            id: veggies
+            hint_text: "Veggies"
+            on_text: root.update_text("veg", self.text, "veg")
+        Button:
+            text: "Submit Veggies"
+            on_press: root.update_db()
+        TextInput:
+            multiline: False
+            id: carbs
+            hint_text: "Carb"
+            on_text: root.update_text("carb", self.text, "carb")
+        Button:
+            text: "Submit Carbs"
+            on_press: root.update_db()
+
 <MainGrid>:
 
     meal: meal
@@ -21,3 +63,4 @@
         on_press: root.build_meal()
     Button:
         text: "Add Food"
+        on_press: Factory.MyPopup().open()
